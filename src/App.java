@@ -23,13 +23,12 @@ public class App extends Application {
     private double angleHorizontal = 0;
     private double angleVertical = 0;
     Text HInclinaisonTexte = new Text("l'inclinaison vers la droite est de: "+angleHorizontal+"°");// indique l'inclinaison vers la gauche
-    Text VInclinaisonTexte = new Text("l'inclinaison vers le bas est de: "+0+"°");// indique l'inclinaison vers le bas
+    Text VInclinaisonTexte = new Text("l'inclinaison vers le bas est de: "+angleVertical+"°");// indique l'inclinaison vers le bas
 
 
 
     @Override
     public void start(Stage stage) throws Exception {
-        Image image = new Image("C:\\Users\\Eleves\\Desktop\\test project\\JavaFX\\src\\cadre.png");
 
         HBox hbox = new HBox(15); // représente les information d'inclinaison
 
@@ -45,11 +44,9 @@ public class App extends Application {
 
         /***********Testing spot************/
 
+        Cadran_Interface cadran = new Cadran_Interface();
 
-
-        SovieticDial cadran = new SovieticDial(angleHorizontal,angleVertical);
-
-        root.getChildren().addAll(cadran.getCadran());
+        root.getChildren().addAll(cadran.getSovieticDial());
 
         /***********************************/
 
@@ -79,20 +76,10 @@ public class App extends Application {
                 break;
 
             }
-
-            if(angleVertical>=90)angleVertical=90;
-            if(angleVertical<=-90)angleVertical=-90;
-
-
-            angleHorizontal = angleHorizontal%360;
-            if(angleHorizontal>180) angleHorizontal = angleHorizontal-360;
-            else if(angleHorizontal<=(-180)) angleHorizontal = angleHorizontal+360;
-
-
-            cadran.Update(angleHorizontal, angleVertical);
+            cadran.setAngles(angleHorizontal, angleVertical);
 
             root.getChildren().remove(1);// supprimer l'ancienne image
-            root.getChildren().addAll(cadran.getCadran());
+            root.getChildren().addAll(cadran.getSovieticDial());
 
             HInclinaisonTexte.setText("l'inclinaison vers la droite est de: "+angleHorizontal+"°");// indique l'inclinaison vers la gauche
             VInclinaisonTexte.setText("l'inclinaison vers le bas est de: "+angleVertical+"°");// indique l'inclinaison vers le bas
@@ -107,6 +94,7 @@ public class App extends Application {
     }
     
     public static void main(String[] args) {
+
         launch(args);
     }
 }

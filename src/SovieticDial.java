@@ -20,10 +20,9 @@ class SovieticDial extends cadran
      * @return l'image du type ImageView
      */
     @Override
-    protected ImageView getPlane() // à changer en void pour ne pas renvoyer une image à chaque fois
+    protected void UpdatePlane() // à changer en void pour ne pas renvoyer une image à chaque fois
     {
         ImageViewAvion.setRotate(angleHorizontal);
-        return ImageViewAvion;
     }
     /**
      * fonction qui renvoie la position de la position y de l'image à couper 
@@ -68,11 +67,11 @@ class SovieticDial extends cadran
     public javafx.scene.Group getCadran()
     {
 
-        ImageView imageAvion = getPlane();
+        UpdatePlane();
 
-        imageAvion.setX((tailleCadran - imageAvion.getLayoutBounds().getWidth())/2);
-        imageAvion.setY((tailleCadran - imageAvion.getLayoutBounds().getHeight())/2);
+        ImageViewAvion.setX((tailleCadran - ImageViewAvion.getLayoutBounds().getWidth())/2);
+        ImageViewAvion.setY((tailleCadran - ImageViewAvion.getLayoutBounds().getHeight())/2);
 
-        return new javafx.scene.Group(getWallpaper(),imageAvion);
+        return new javafx.scene.Group(getWallpaper(),ImageViewAvion);
     }
 }

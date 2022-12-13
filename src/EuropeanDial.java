@@ -10,9 +10,9 @@ class EuropeanDial extends cadran
         super(angleHorizontal,angleVertical);
     }
 
-    protected ImageView getPlane() // à changer en void pour ne pas renvoyer une image à chaque fois
+    protected void UpdatePlane() // à changer en void pour ne pas renvoyer une image à chaque fois
     {
-        return ImageViewAvion;
+        // L'avion reste immobile dans la norme européenne, cette fonction restera alors constante
     }
 
     private double y(double angle,double tailleImage)
@@ -30,11 +30,6 @@ class EuropeanDial extends cadran
         
         PixelReader reader = ImageViewArrierePlan.getImage().getPixelReader();
         WritableImage newImage = new WritableImage(reader, (int)ImageHeight/4,(int)y(angleVertical,ImageHeight), (int)ImageHeight/2, (int)ImageHeight/2);
-    
-        // faire la rotation de l'arrière plan ici
-        ImageView newImageView = new ImageView(newImage);
-        newImageView.setRotate(ImageHeight);
-
 
         javafx.scene.paint.ImagePattern imagePattern = new javafx.scene.paint.ImagePattern(newImage);
 
@@ -43,17 +38,21 @@ class EuropeanDial extends cadran
         bord.setCenterX(tailleCadran/2);
         bord.setCenterY(tailleCadran/2);
 
+        // faire la rotation de l'arrière plan ici
+        bord.setRotate(-angleHorizontal);
+
         return new javafx.scene.Group(bord);
     }
 
     public javafx.scene.Group getCadran()
     {
-        ImageView imageAvion = getPlane();
 
-        imageAvion.setX((tailleCadran - imageAvion.getLayoutBounds().getWidth())/2);
-        imageAvion.setY((tailleCadran - imageAvion.getLayoutBounds().getHeight())/2);
+        UpdatePlane(); // fonction inutile mais ajoutée en cas de potentielle mise à jour
 
-        return new javafx.scene.Group(getWallpaper(),imageAvion);
+        ImageViewAvion.setX((tailleCadran - ImageViewAvion.getLayoutBounds().getWidth())/2);
+        ImageViewAvion.setY((tailleCadran - ImageViewAvion.getLayoutBounds().getHeight())/2);
+
+        return new javafx.scene.Group(getWallpaper(),ImageViewAvion);
     }
 
 }
