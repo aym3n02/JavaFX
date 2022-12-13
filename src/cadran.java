@@ -13,7 +13,7 @@ abstract class cadran
      */
     protected ImageView ImageViewAvion = new ImageView(new Image("C:\\Users\\Eleves\\Desktop\\test project\\JavaFX\\src\\avion.png")); // photo de l'avion du cadran
     protected ImageView ImageViewArrierePlan = new ImageView(new Image("C:\\Users\\Eleves\\Desktop\\test project\\JavaFX\\src\\arriere plan.png")); // photo de l'Arrière plan
-    protected double tailleCadran = 300; // représente la taille du cadran(il est de forme carrée)
+    protected double tailleCadran = 50; // représente la taille du cadran(il est de forme carrée)
 
     /**
      * Constructeur d'un cadran
@@ -30,7 +30,7 @@ abstract class cadran
      * méthode qui renvoie l'image de l'avion
      * @return l'image du type ImageView
      */
-    abstract protected ImageView getPlane();
+    abstract protected void UpdatePlane();
 
     /**
      * méthode qui renvoie l'arrière plan du cadran
