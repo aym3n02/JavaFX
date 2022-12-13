@@ -7,54 +7,58 @@ class Cadran_Interface
 {
     SovieticDial sovieticDial = new SovieticDial(0,0);
     EuropeanDial europeanDial = new EuropeanDial(0,0);
-    private double angleHorizontal = 0;
-    private double angleVertical = 0;
+    private double roulis = 0;
+    private double tangage = 0;
 
     /**
-     * méthode qui remet les angles dans leurs intervalles correspondants: angleHorizontal de -179 à 180 et angleVertical de -90 à 90
+     * méthode qui remet les angles dans leurs intervalles correspondants: roulis de -179 à 180 et tangage de -90 à 90
      */
     private void nomaliseAngles()
     {
         // les deux cas en dessous doivent être plus détaillés en fonction de l'utilisation 
-        if(angleVertical>=90)angleVertical=90; 
-        if(angleVertical<=-90)angleVertical=-90;
+        if(tangage>=90)tangage=90; 
+        if(tangage<=-90)tangage=-90;
 
-        angleHorizontal = angleHorizontal%360;
-        if(angleHorizontal>180) angleHorizontal = angleHorizontal-360;
-        else if(angleHorizontal<=(-180)) angleHorizontal = angleHorizontal+360;
+        roulis = roulis%360;
+        if(roulis>180) roulis = roulis-360;
+        else if(roulis<=(-180)) roulis = roulis+360;
     }
 
     /**
      * préciser les angles de l'avion
-     * @param angleHorizontal l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
-     * @param angleVertical l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
+     * @param roulis l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
+     * @param tangage l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
      */
-    public void setAngles(double angleHorizontal,double angleVertical)
+    public void setAngles(double roulis,double tangage)
     {
-        this.angleHorizontal=angleHorizontal;
-        this.angleVertical = angleVertical;
+        this.roulis=roulis;
+        this.tangage = tangage;
         nomaliseAngles();
     }
 
     /**
      * méthode qui fait une rotation vers 
-     * @param angleHorizontal l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
-     * @param angleVertical l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
+     * @param roulis l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
+     * @param tangage l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
      */
-    public void rotation(double angleHorizontal,double angleVertical)
+    public void rotation(double roulis,double tangage)
     {
-        setAngles(this.angleHorizontal+angleHorizontal,this.angleVertical+angleVertical);
+        setAngles(this.roulis+roulis,this.tangage+tangage);
     }
 
+    /**
+     * 
+     * @return 
+     */
     public javafx.scene.Group getEuropeanDial()
     {
-        europeanDial.Update(angleHorizontal, angleVertical);
+        europeanDial.Update(roulis, tangage);
         return europeanDial.getCadran();
     }
 
     public javafx.scene.Group getSovieticDial()
     {
-        sovieticDial.Update(angleHorizontal, angleVertical);
+        sovieticDial.Update(roulis, tangage);
         return sovieticDial.getCadran();
     }
 
@@ -62,14 +66,14 @@ class Cadran_Interface
 
     /**
      * fonction qui renvoit le cadran dans la norme soviétique(simulation)
-     * @param angleHorizontal l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
-     * @param angleVertical l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
+     * @param roulis l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
+     * @param tangage l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
      * @return le cadran dans la norme soviétique 
      */
-    public javafx.scene.Group getSovieticDial(double angleHorizontal,double angleVertical)
+    public javafx.scene.Group getSovieticDial(double roulis,double tangage)
     {
-        setAngles(angleHorizontal,angleVertical);
-        sovieticDial.Update(angleHorizontal, angleVertical);
+        setAngles(roulis,tangage);
+        sovieticDial.Update(roulis, tangage);
         return sovieticDial.getCadran();
     }
 
@@ -79,10 +83,10 @@ class Cadran_Interface
      * @param angleVertical l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
      * @return le cadran dans la norme européenne 
      */
-    public javafx.scene.Group getEuropeanDial(double angleHorizontal,double angleVertical)
+    public javafx.scene.Group getEuropeanDial(double roulis,double tangage)
     {
-        setAngles(angleHorizontal,angleVertical);
-        europeanDial.Update(this.angleHorizontal, this.angleVertical);
+        setAngles(roulis,tangage);
+        europeanDial.Update(this.roulis, this.tangage);
         return europeanDial.getCadran();
     }
 }

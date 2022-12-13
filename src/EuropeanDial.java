@@ -5,9 +5,9 @@ import javafx.scene.shape.Circle;
 class EuropeanDial extends cadran
 {
 
-    public EuropeanDial(double angleHorizontal, double angleVertical)
+    public EuropeanDial(double roulis, double tangage)
     {
-        super(angleHorizontal,angleVertical);
+        super(roulis,tangage);
     }
 
     protected void UpdatePlane() // à changer en void pour ne pas renvoyer une image à chaque fois
@@ -29,7 +29,7 @@ class EuropeanDial extends cadran
         double ImageHeight = ImageViewArrierePlan.getImage().getHeight();
         
         PixelReader reader = ImageViewArrierePlan.getImage().getPixelReader();
-        WritableImage newImage = new WritableImage(reader, (int)ImageHeight/4,(int)y(angleVertical,ImageHeight), (int)ImageHeight/2, (int)ImageHeight/2);
+        WritableImage newImage = new WritableImage(reader, (int)ImageHeight/4,(int)y(tangage,ImageHeight), (int)ImageHeight/2, (int)ImageHeight/2);
 
         javafx.scene.paint.ImagePattern imagePattern = new javafx.scene.paint.ImagePattern(newImage);
 
@@ -39,7 +39,7 @@ class EuropeanDial extends cadran
         bord.setCenterY(tailleCadran/2);
 
         // faire la rotation de l'arrière plan ici
-        bord.setRotate(-angleHorizontal);
+        bord.setRotate(-roulis);
 
         return new javafx.scene.Group(bord);
     }

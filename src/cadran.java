@@ -4,8 +4,8 @@ import javafx.scene.image.*;
 
 abstract class cadran
 {
-    protected double angleHorizontal = 0; // sens horaire
-    protected double angleVertical = 0; // positive vers le haut, négative vers le bas, ne doit pas dépasser 180 ou être inférieur à -180
+    protected double roulis = 0; // sens horaire
+    protected double tangage = 0; // positive vers le haut, négative vers le bas, ne doit pas dépasser 180 ou être inférieur à -180
 
 
     /**
@@ -13,17 +13,19 @@ abstract class cadran
      */
     protected ImageView ImageViewAvion = new ImageView(new Image("C:\\Users\\Eleves\\Desktop\\test project\\JavaFX\\src\\avion.png")); // photo de l'avion du cadran
     protected ImageView ImageViewArrierePlan = new ImageView(new Image("C:\\Users\\Eleves\\Desktop\\test project\\JavaFX\\src\\arriere plan.png")); // photo de l'Arrière plan
-    protected double tailleCadran = 50; // représente la taille du cadran(il est de forme carrée)
+    protected double tailleCadran = 300; // représente la taille du cadran(il est de forme carrée)
 
     /**
      * Constructeur d'un cadran
-     * @param angleHorizontal l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
-     * @param angleVertical l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
+     * @param roulis l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
+     * @param tangage l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
      */
-    public cadran(double angleHorizontal, double angleVertical)
+    public cadran(double roulis, double tangage)
     {
-        this.angleHorizontal = angleHorizontal;
-        this.angleVertical = angleVertical;
+        this.roulis = roulis;
+        this.tangage = tangage;
+        ImageViewAvion.setFitHeight(tailleCadran/1.5);
+        ImageViewAvion.setFitWidth(tailleCadran/1.5);
     }
     
     /**
@@ -46,12 +48,12 @@ abstract class cadran
 
     /**
      * méthode qui permet d'actualiser le cadran
-     * @param angleHorizontal le nouveau angle d'inclinaison droite/gauche
-     * @param angleVertical le nouveau angle d'inclinaison haut/bas
+     * @param roulis le nouveau angle d'inclinaison droite/gauche
+     * @param tangage le nouveau angle d'inclinaison haut/bas
      */
-    public void Update(double angleHorizontal, double angleVertical)
+    public void Update(double roulis, double tangage)
     {
-        this.angleHorizontal = angleHorizontal;
-        this.angleVertical = angleVertical;
+        this.roulis = roulis;
+        this.tangage = tangage;
     }
 }

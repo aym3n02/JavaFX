@@ -7,12 +7,12 @@ class SovieticDial extends cadran
 {
     /**
      * Constructeur du cadran soviétique
-     * @param angleHorizontal l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
-     * @param angleVertical l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
+     * @param roulis l'angle d'inclinaison vers la droite(positif) ou la gauche(négatif)
+     * @param tangage l'angle d'inclinaison vers le haut(positif) ou le bas(négatif)
      */
-    public SovieticDial(double angleHorizontal, double angleVertical)
+    public SovieticDial(double roulis, double tangage)
     {
-        super(angleHorizontal,angleVertical);
+        super(roulis,tangage);
     }
 
     /**
@@ -22,7 +22,7 @@ class SovieticDial extends cadran
     @Override
     protected void UpdatePlane() // à changer en void pour ne pas renvoyer une image à chaque fois
     {
-        ImageViewAvion.setRotate(angleHorizontal);
+        ImageViewAvion.setRotate(roulis);
     }
     /**
      * fonction qui renvoie la position de la position y de l'image à couper 
@@ -48,7 +48,7 @@ class SovieticDial extends cadran
         double ImageHeight = ImageViewArrierePlan.getImage().getHeight();
         
         PixelReader reader = ImageViewArrierePlan.getImage().getPixelReader();
-        WritableImage newImage = new WritableImage(reader, (int)ImageHeight/4,(int)y(angleVertical,ImageHeight), (int)ImageHeight/2, (int)ImageHeight/2);
+        WritableImage newImage = new WritableImage(reader, (int)ImageHeight/4,(int)y(tangage,ImageHeight), (int)ImageHeight/2, (int)ImageHeight/2);
         
         javafx.scene.paint.ImagePattern imagePattern = new javafx.scene.paint.ImagePattern(newImage);
 

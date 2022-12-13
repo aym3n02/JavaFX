@@ -9,10 +9,10 @@ import javafx.scene.text.Text;
 final class Graphics
 {
     private char nbCadran = 1; // nombre de Cadrans à afficher sur l'écran
-    private double angleHorizontal = 0;
-    private double angleVertical = 0;
-    private Text HInclinaisonTexte = new Text("l'inclinaison vers la droite est de: "+angleHorizontal+"°");// indique l'inclinaison vers la gauche
-    private Text VInclinaisonTexte = new Text("l'inclinaison vers le bas est de: "+angleVertical+"°");// indique l'inclinaison vers le bas
+    private double roulis = 0;
+    private double tangage = 0;
+    private Text HInclinaisonTexte = new Text("l'inclinaison vers la droite est de: "+roulis+"°");// indique l'inclinaison vers la gauche
+    private Text VInclinaisonTexte = new Text("l'inclinaison vers le bas est de: "+tangage+"°");// indique l'inclinaison vers le bas
 
     void lancer(Stage stage)
     {
@@ -24,22 +24,20 @@ final class Graphics
     
             VBox vbox = new VBox(4);
     
-            vbox.getChildren().addAll(hbox);
-    
-    
+            
             Group root = new Group(vbox);
     
-    
             /***********Testing spot************/
-    
-    
-    
-            EuropeanDial cadran = new EuropeanDial(angleHorizontal,angleVertical);
+
+            SovieticDial cadran = new SovieticDial(roulis,tangage);
     
             root.getChildren().addAll(cadran.getCadran());
     
             /***********************************/
-    
+            
+
+            
+
             Scene scene = new Scene(root, 300, 300);
     
             scene.addEventHandler(KeyEvent.KEY_PRESSED, event ->
@@ -47,19 +45,19 @@ final class Graphics
                 switch(event.getCode())
                 {
                     case RIGHT:
-                    angleHorizontal++;
+                    roulis++;
                     break;
     
                     case LEFT:
-                    angleHorizontal--;
+                    roulis--;
                     break;
     
                     case UP:
-                    angleVertical++;
+                    tangage++;
                     break;
     
                     case DOWN:
-                    angleVertical--;
+                    tangage--;
                     break;
     
                     default:
@@ -67,22 +65,22 @@ final class Graphics
     
                 }
     
-                if(angleVertical>=90)angleVertical=90;
-                if(angleVertical<=-90)angleVertical=-90;
+                if(tangage>=90)tangage=90;
+                if(tangage<=-90)tangage=-90;
     
     
-                angleHorizontal = angleHorizontal%360;
-                if(angleHorizontal>180) angleHorizontal = angleHorizontal-360;
-                else if(angleHorizontal<=(-180)) angleHorizontal = angleHorizontal+360;
+                roulis = roulis%360;
+                if(roulis>180) roulis = roulis-360;
+                else if(roulis<=(-180)) roulis = roulis+360;
     
     
-                cadran.Update(angleHorizontal, angleVertical);
+                cadran.Update(roulis, tangage);
     
                 root.getChildren().remove(1);// supprimer l'ancienne image
                 root.getChildren().addAll(cadran.getCadran());
     
-                HInclinaisonTexte.setText("l'inclinaison vers la droite est de: "+angleHorizontal+"°");// indique l'inclinaison vers la gauche
-                VInclinaisonTexte.setText("l'inclinaison vers le bas est de: "+angleVertical+"°");// indique l'inclinaison vers le bas
+                HInclinaisonTexte.setText("l'inclinaison vers la droite est de: "+roulis+"°");// indique l'inclinaison vers la gauche
+                VInclinaisonTexte.setText("l'inclinaison vers le bas est de: "+tangage+"°");// indique l'inclinaison vers le bas
             
             });
     
