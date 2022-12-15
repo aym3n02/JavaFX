@@ -14,16 +14,30 @@ import javafx.scene.layout.BorderPane;
 
 final class Graphics
 {
-    private char nbCadran = 0; // nombre de Cadrans à afficher sur l'écran
-    private HBox CadransBox = new HBox(5); // VBox qui contient les deux portaits des cadrans, soit l'un à côté de l'autre, soit un seul cadran
-    private Text HInclinaisonTexte = new Text();// indique l'inclinaison vers la gauche
-    private Text VInclinaisonTexte = new Text();// indique l'inclinaison vers le bas
+    private char nbCadran ; // nombre de Cadrans à afficher sur l'écran
+    private HBox CadransBox; // VBox qui contient les deux portaits des cadrans, soit l'un à côté de l'autre, soit un seul cadran
+    private Text HInclinaisonTexte;// indique l'inclinaison vers la gauche
+    private Text VInclinaisonTexte ;// indique l'inclinaison vers le bas
 
     // le groupe les objets qui doivent être affichés sur l'ecran
-    Cadran_Interface Interface = new Cadran_Interface(); // l'interface qui permet d'avoir les images des cadrans
+    Cadran_Interface Interface ; // l'interface qui permet d'avoir les images des cadrans
 
-    boolean ShowSovietic = false; // boolean qui indique s'il faut montrer le cadran soviétique
-    boolean ShowEuropean = false; // boolean qui indique s'il faut montrer le cadran européen
+    boolean ShowSovietic; // boolean qui indique s'il faut montrer le cadran soviétique
+    boolean ShowEuropean; // boolean qui indique s'il faut montrer le cadran européen
+
+    /**
+     * constructeur par défaut qui initialise les variables
+     */
+    public Graphics()
+    {
+        nbCadran = 0;
+        CadransBox = new HBox(5);
+        HInclinaisonTexte = new Text();
+        VInclinaisonTexte = new Text();
+        Interface = new Cadran_Interface();
+        ShowSovietic = false;
+        ShowEuropean = false;
+    }
     /**
      * fonction qui sert à actualiser les cadrans
      */
@@ -33,15 +47,24 @@ final class Graphics
         switch(nbCadran)
         {
             case 0:// dans ce cas il ne faut rien afficher
+            HInclinaisonTexte.setText("");
+            VInclinaisonTexte.setText("");
             break;
 
             case 1: // il faut afficher un seul cadran
-            if(ShowSovietic)CadransBox.getChildren().addAll( new HBox(new Text("Cadran Soviétique"),Interface.getSovieticDial()));
-            if(ShowEuropean)CadransBox.getChildren().addAll(new HBox(new Text("Cadran Européen"),Interface.getEuropeanDial()));
+            if(ShowSovietic)CadransBox.getChildren().addAll(new VBox(new Text("Cadran Soviétique:"),Interface.getSovieticDial()));
+            if(ShowEuropean)CadransBox.getChildren().addAll(new VBox(new Text("Cadran Européen:"),Interface.getEuropeanDial()));
+
+            HInclinaisonTexte.setText("l'inclinaison vers la droite est de: "+Interface.getRoulis()+"°");// indique l'inclinaison vers la gauche
+            VInclinaisonTexte.setText("l'inclinaison vers le bas est de: "+Interface.getTangage()+"°");// indique l'inclinaison vers le bas
+
             break;
 
             case 2: //il faut afficher deux cadrans
-            CadransBox.getChildren().addAll(Interface.getSovieticDial(),Interface.getEuropeanDial());
+            CadransBox.getChildren().addAll(new VBox(new Text("Cadran Soviétique:"),Interface.getSovieticDial()),new VBox(new Text("Cadran Européen:"),Interface.getEuropeanDial()));
+
+            HInclinaisonTexte.setText("l'inclinaison vers la droite est de: "+Interface.getRoulis()+"°");// indique l'inclinaison vers la gauche
+            VInclinaisonTexte.setText("l'inclinaison vers le bas est de: "+Interface.getTangage()+"°");// indique l'inclinaison vers le bas
             break;
         }
     }
@@ -112,12 +135,12 @@ final class Graphics
             hbox.getChildren().addAll(HInclinaisonTexte,VInclinaisonTexte);
     
             VBox vbox = new VBox(4);
+            vbox.setTranslateY(25); // car la barre des menus fait 25 pixels de hauteur
 
             root.getChildren().addAll(vbox);
 
-            
-
             vbox.getChildren().addAll(CadransBox,hbox);
+
             
         ///////////////////////////////////////
            
@@ -155,10 +178,8 @@ final class Graphics
 
                 actualiserCadran();
                 
-
-                // il faut ajouter des getters dans la class Interface pour connaîtres les angles !!
-                HInclinaisonTexte.setText("l'inclinaison vers la droite est de: "+"°");// indique l'inclinaison vers la gauche
-                VInclinaisonTexte.setText("l'inclinaison vers le bas est de: "+"°");// indique l'inclinaison vers le bas
+                HInclinaisonTexte.setText("l'inclinaison vers la droite est de: "+Interface.getRoulis()+"°");// indique l'inclinaison vers la gauche
+                VInclinaisonTexte.setText("l'inclinaison vers le bas est de: "+Interface.getTangage()+"°");// indique l'inclinaison vers le bas
             });
     
             
