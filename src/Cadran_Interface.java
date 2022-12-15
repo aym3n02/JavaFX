@@ -5,10 +5,39 @@
  */
 class Cadran_Interface
 {
-    SovieticDial sovieticDial = new SovieticDial(0,0);
-    EuropeanDial europeanDial = new EuropeanDial(0,0);
-    private double roulis = 0;
-    private double tangage = 0;
+    SovieticDial sovieticDial ;
+    EuropeanDial europeanDial;
+    private double roulis;
+    private double tangage;
+
+    /**
+     * constructeur par défaut de l'interface
+     */
+    public Cadran_Interface()
+    {
+        sovieticDial = new SovieticDial(0,0);
+        europeanDial = new EuropeanDial(0,0);
+        roulis = 0;
+        tangage = 0;
+    }
+
+    /**
+     * getter du roulis
+     * @return le roulis
+     */
+    public double getRoulis()
+        {
+            return roulis;
+        }
+    
+    /**
+     * getter du tangage
+     * @return le tangage
+     */
+    public double getTangage()
+    {
+        return tangage;
+    }
 
     /**
      * méthode qui remet les angles dans leurs intervalles correspondants: roulis de -179 à 180 et tangage de -90 à 90
