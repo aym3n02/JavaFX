@@ -30,13 +30,13 @@ final class Graphics
      */
     public Graphics()
     {
-        nbCadran = 0;
+        nbCadran = 0; // le nombre des cadrans à afficher
         CadransBox = new HBox(5);
         HInclinaisonTexte = new Text();
         VInclinaisonTexte = new Text();
-        Interface = new Cadran_Interface();
-        ShowSovietic = false;
-        ShowEuropean = false;
+        Interface = new Cadran_Interface(); // l'interface de gestion des cadrans
+        ShowSovietic = false; // boolean qui indique si le cadran sovitétique doit être affiché
+        ShowEuropean = false; // boolean qui indique si le cadran européen doit être affiché
     }
     /**
      * fonction qui sert à actualiser les cadrans
@@ -117,7 +117,7 @@ final class Graphics
             if(ShowSovietic)nbCadran++;
             if(ShowEuropean)nbCadran++;
             
-            actualiserCadran();
+            actualiserCadran(); // actualiser le cadran
         }
         );
 
@@ -145,10 +145,10 @@ final class Graphics
         ///////////////////////////////////////
            
             
-            root.setTop(menuBar);
+            root.setTop(menuBar); // création de la barre des tâches
             
         // gestion des entrée/sorties avec l'utilisateur 
-            Scene scene = new Scene(root, 600, 600);
+            Scene scene = new Scene(root, 610, 600);
     
             scene.addEventHandler(KeyEvent.KEY_PRESSED, event ->
             {
@@ -176,7 +176,7 @@ final class Graphics
                 }
     
 
-                actualiserCadran();
+                actualiserCadran(); // actualiser le cadran
                 
                 HInclinaisonTexte.setText("l'inclinaison vers la droite est de: "+Interface.getRoulis()+"°");// indique l'inclinaison vers la gauche
                 VInclinaisonTexte.setText("l'inclinaison vers le bas est de: "+Interface.getTangage()+"°");// indique l'inclinaison vers le bas
